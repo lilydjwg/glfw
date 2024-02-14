@@ -1464,6 +1464,8 @@ static void processEvent(XEvent *event)
                 Time diff = event->xkey.time - window->x11.keyPressTimes[keycode];
                 if (diff == event->xkey.time || (diff > 0 && diff < ((Time)1 << 31)))
                 {
+                    if (filtered) return;
+
                     if (keycode)
                         _glfwInputKey(window, key, keycode, GLFW_PRESS, mods);
 
